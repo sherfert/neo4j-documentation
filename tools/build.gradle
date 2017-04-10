@@ -1,0 +1,36 @@
+group 'org.neo4j.doc.tools'
+
+apply plugin: 'java'
+apply plugin: 'application'
+
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+}
+
+mainClassName = 'org.neo4j.doc.tools.JmxTool'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    jcenter()
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    compile 'net.sourceforge.argparse4j:argparse4j:0.7.0'
+
+//    compile 'org.neo4j:neo4j-ha:3.2.0-SNAPSHOT'
+//    compile 'org.neo4j:neo4j-kernel:3.2.0-SNAPSHOT'
+    compile group: 'org.neo4j', name: 'neo4j-ha', version: '3.2.0-SNAPSHOT'
+    compile group: 'org.neo4j', name: 'neo4j-kernel', version: '3.2.0-SNAPSHOT'
+//    compile group: 'org.neo4j', name: 'neo4j-enterprise-kernel', version: '3.2.0-SNAPSHOT'
+    compile group: 'org.neo4j', name: 'neo4j-jmx', version: '3.2.0-SNAPSHOT'
+    compile group: 'org.neo4j', name: 'neo4j-management', version: '3.2.0-SNAPSHOT'
+
+    testCompile 'junit:junit:4.11'
+}
