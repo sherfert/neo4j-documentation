@@ -3,9 +3,12 @@ package org.neo4j.doc.tools;
 import org.neo4j.cluster.ClusterSettings;
 import org.neo4j.doc.AsciiDocListGenerator;
 import org.neo4j.doc.JmxItem;
+import org.neo4j.doc.TestHighlyAvailableGraphDatabaseFactory;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.factory.GraphDatabaseBuilder;
+import org.neo4j.graphdb.factory.GraphDatabaseSettings;
 import org.neo4j.graphdb.factory.HighlyAvailableGraphDatabaseFactory;
+import org.neo4j.kernel.configuration.BoltConnector;
 
 import javax.management.Descriptor;
 import javax.management.InstanceNotFoundException;
@@ -63,7 +66,7 @@ public class JmxTool {
 
     public JmxTool() {
         File storeDir = new File(dbDir);
-        GraphDatabaseBuilder builder = new HighlyAvailableGraphDatabaseFactory().newEmbeddedDatabaseBuilder(storeDir);
+        GraphDatabaseBuilder builder = new TestHighlyAvailableGraphDatabaseFactory().newEmbeddedDatabaseBuilder(storeDir);
         db = builder.setConfig( ClusterSettings.server_id, "1" )
                 .setConfig( "jmx.port", "9913" )
                 .setConfig( ClusterSettings.initial_hosts, ":5001" )
@@ -161,7 +164,7 @@ public class JmxTool {
         }
 
         if (beanInfo.length() > 0) {
-            System.out.printf("    [---] %s%n", beanInfo.toString());
+//            System.out.printf("    [---] %s%n", beanInfo.toString());
             Writer fw = null;
             try {
                 fw = AsciiDocGenerator.getFW("target/docs/ops", id);
